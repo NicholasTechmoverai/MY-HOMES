@@ -24,7 +24,6 @@ class UserHandler:
         self.phone = phone
         self.location = location
 
-    @staticmethod
     def validate_user_data(self) -> Dict:
         if not (self.username and self.email and self.password):
             return {"success": False, "message": "Username, email, and password are required."}
@@ -128,3 +127,5 @@ class UserHandler:
             return {"success": False, "message": "User not found."}
         except Exception as err:
             return {"success": False, "message": f"Error updating user: {str(err)}"}
+
+

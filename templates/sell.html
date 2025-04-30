@@ -216,7 +216,8 @@
             <div class="form-group">
                 <h2>Location Details</h2>
             </div>
-            
+            <input type="text" name="state" value="Nakuru" hidden />
+
             <div class="form-row">
                 <div class="form-group">
                     <label for="property-address">Address*</label>
@@ -387,26 +388,25 @@
                 e.preventDefault();
         
                 const images = fileInput.files;
-        
-                if (images.length < 3 || images.length > 10) {
-                    alert('Please upload between 3 and 10 images.');
-                    return;
-                }
-        
                 const formData = new FormData();
-        
-                // Append all fields manually (to be safe)
+
+                // Append all regular fields
                 [...form.elements].forEach(el => {
-                    if (el.name && el.type !== 'file') {
+                    if (el.name && el.type !== 'file' && el.type !== 'checkbox') {
                         formData.append(el.name, el.value);
                     }
                 });
-        
-                // Append images manually
+
+                // Append amenities checkboxes (assuming they have name="amenities")
+                document.querySelectorAll('input[name="amenities"]:checked').forEach(checkbox => {
+                    formData.append('amenities', checkbox.value);
+                });
+
+                // Append images (use 'images' as the field name without brackets)
                 for (let i = 0; i < images.length; i++) {
-                    formData.append('images[]', images[i]); // match Flask field: images[]
+                    formData.append('images', images[i]); // Changed from 'images[]' to 'images'
                 }
-        
+
                 // Add owner ID
                 formData.append('owner_id', userInfo.id);
         
@@ -416,7 +416,7 @@
                 submitBtn.textContent = 'Uploading...';
         
                 // Submit via fetch
-                fetch('/submit-property', {
+                fetch('/property', {
                     method: 'POST',
                     body: formData
                 })

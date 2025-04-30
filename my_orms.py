@@ -1,6 +1,8 @@
 from tortoise import Tortoise, fields, run_async
 from tortoise.models import Model
 
+from config import Config
+
 class User(Model):
     user_id = fields.UUIDField(pk=True)
     name = fields.CharField(max_length=255)
@@ -14,6 +16,17 @@ class User(Model):
     is_verified = fields.BooleanField(default=False)
 
 
+    def to_dict(self):
+        return {
+            "id": str(self.user_id),
+            "name": self.name,
+            "email": self.email,
+            "phonenumber": self.phonenumber,
+            "location": self.location,
+            "picture":f"{Config.IMAGE_PATH}/{self.profile_picture}",
+        }
+
+
 
 class Property(Model):
     property_id = fields.UUIDField(pk=True)
@@ -23,13 +36,16 @@ class Property(Model):
     price = fields.DecimalField(max_digits=20, decimal_places=2)
     address = fields.CharField(max_length=255)
     city = fields.CharField(max_length=100)
-    state = fields.CharField(max_length=100)
+    state = fields.CharField(max_length=100,null=True)
     property_type = fields.CharField(max_length=50)  # e.g., "Apartment", "House"
     size_sqft = fields.DecimalField(max_digits=10, decimal_places=2, null=True)  # Size in square feet
     bedrooms = fields.IntField(null=True) 
     bathrooms = fields.IntField(null=True)
     garage = fields.IntField(null=True)  # Number of garage spaces
     year_built = fields.IntField(null=True)  # Year the property was built
+    contact_name = fields.CharField(max_length=100, null=True)
+    contact_phone = fields.CharField(max_length=20, null=True)
+    contact_email = fields.CharField(max_length=100, null=True)
     created_at = fields.DatetimeField(auto_now_add=True)
     updated_at = fields.DatetimeField(auto_now=True)
     is_available = fields.BooleanField(default=True)  # Availability status
@@ -104,3 +120,17 @@ class likes(Model):
 #     await Tortoise.generate_schemas()  # ← This creates the tables for you!
 
 # run_async(init())
+
+
+
+
+from tortoise.contrib.fastapi import register_tortoise
+
+def init_db(app):
+    register_tortoise(
+        app,
+        db_url="mysql://root:0000@localhost/MY_HOMES",
+        modules={"models": ["my_orms"]},
+        generate_schemas=True,
+        add_exception_handlers=True,
+    )

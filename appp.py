@@ -4,9 +4,14 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from routes.main import main_router
 from routes.properties import property_router
+from my_orms import init_db
 import uvicorn
 
+
+
 app = FastAPI()
+init_db(app)
+
 
 templates = Jinja2Templates(directory="templates")
 
@@ -63,4 +68,4 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Run with: python main.py
 if __name__ == "__main__":
-    uvicorn.run("appp:app", host="127.0.0.1", port=8000, reload=True)
+    uvicorn.run("appp:app", reload=True)
