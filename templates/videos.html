@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MYHOMES VIDEOS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/style2.css">
+
+    <style>
+        :root {
+            --primary-color:#4CAF50;
+            --secondary-color: #2f3542;
+            --light-color: #f1f2f6;
+            --dark-color: #1e272e;
+            --success-color: #2ed573;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f6fa;
+            color: var(--dark-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #ddd;
+            position: relative !important;
+            top: 0;
+            z-index: 100;
+            background-color: #f5f6fa;
+
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .search-bar {
+            display: flex;
+            width: 40%;
+        }
+        
+        .search-bar input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 25px 0 0 25px;
+            outline: none;
+        }
+        
+        .search-bar button {
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 0 25px 25px 0;
+            cursor: pointer;
+        }
+        
+        .user-actions a {
+            margin-left: 15px;
+            color: var(--dark-color);
+            text-decoration: none;
+        }
+        
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .video-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .video-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+        }
+        
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .video-info {
+            padding: 15px;
+        }
+        
+        .video-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .video-author {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+        
+        .video-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .video-actions {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .action-btn:hover {
+            color: var(--primary-color);
+        }
+        
+        .action-btn.liked {
+            color: var(--primary-color);
+        }
+        
+        .action-btn.favorited {
+            color: var(--success-color);
+        }
+        
+        .comment-section {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background-color: #f9f9f9;
+        }
+        
+        .comment-section.expanded {
+            max-height: 300px;
+            padding: 15px;
+        }
+        
+        .comment {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        
+        .comment-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            margin-right: 10px;
+            background-color: #ddd;
+        }
+        
+        .comment-content {
+            flex: 1;
+        }
+        
+        .comment-author {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .comment-text {
+            font-size: 13px;
+            margin-top: 2px;
+        }
+        
+        .comment-input {
+            display: flex;
+            margin-top: 15px;
+        }
+        
+        .comment-input input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            outline: none;
+        }
+        
+        .comment-input button {
+            margin-left: 10px;
+            padding: 8px 15px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            .video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .search-bar {
+                width: 60%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .search-bar {
+                width: 100%;
+            }
+            
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        video {
+            pointer-events: none;
+        }
+
+        /* Show the controls when the video is hovered */
+        video:hover {
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">MYHOMES Videos</div>
+            <div class="nav-forms">
+                <a href="/" class="nav-btn">HOME</a>
+                <a href="/about" class="nav-btn ">ABOUT</a>
+                <a href="/for_sale" class="nav-btn">FOR SALE</a>
+                <a href="/for_rent" class="nav-btn ">FOR RENT</a>
+                <a href="/sell" class="nav-btn ">SELL</a>
+                <a href="/contact_us" class="nav-btn">CONTACT</a>
+                <a href="/more" class="nav-btn">MORE</a>
+                <a href="/login" class="nav-btn login-btn">LOGIN</a>
+                <a href="/profile" style="display: none;" class="nav-btn profile-btn"><img src="" alt="profile"></a>
+            </div>
+            
+            <div class="search-bar">
+                <input id="video_search" type="text" placeholder="Search videos...">
+                <button onclick="search_video()"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="user-actions">
+                <a href="#"><i class="fas fa-user"></i></a>
+                <a href="#"><i class="fas fa-cog"></i></a>
+            </div>
+        </header>
+        
+        <div class="video-grid">
+            <!-- Video Card 1 -->
+            <div class="video-card">
+                <div class="video-container">
+                    <video controls poster="https://via.placeholder.com/300x169">
+                        <source src="video1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">Amazing Sunset at the Beach</h3>
+                    <p class="video-author">By NatureLover</p>
+                    <div class="video-stats">
+                        <span>1.2M views</span>
+                        <span>2 days ago</span>
+                    </div>
+                </div>
+                <div class="video-actions">
+                    <button class="action-btn like-btn">
+                        <i class="far fa-heart"></i>
+                        <span class="like-count">12.5K</span>
+                    </button>
+                    <button class="action-btn comment-btn">
+                        <i class="far fa-comment"></i>
+                        <span>1.3K</span>
+                    </button>
+                    <button class="action-btn favorite-btn">
+                        <i class="far fa-bookmark"></i>
+                        <span>Save</span>
+                    </button>
+                </div>
+                <div class="comment-section">
+                    <div class="comment">
+                        <div class="comment-avatar"></div>
+                        <div class="comment-content">
+                            <div class="comment-author">TravelFan123</div>
+                            <div class="comment-text">This is absolutely breathtaking! Where was this filmed?</div>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <div class="comment-avatar"></div>
+                        <div class="comment-content">
+                            <div class="comment-author">PhotoPro</div>
+                            <div class="comment-text">Great composition and colors!</div>
+                        </div>
+                    </div>
+                    <div class="comment-input">
+                        <input type="text" placeholder="Add a comment...">
+                        <button>Post</button>
+                    </div>
+                </div>
+            </div>
+            
+
+        </div>
+    </div>
+
+    <script>
+        function search_video(){
+            const query = document.getElementById('video_search').value;
+            fetchvideos(query)
+        }
+       function fetchvideos(query=null) {
+    fetch('/fetchvideos', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ query: query })
+
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const videoContainer = document.querySelector('.video-grid');
+            videoContainer.innerHTML = ''; // clear previous content
+
+            data.videos.forEach(video => {
+                const videoDiv = document.createElement('div');
+                videoDiv.setAttribute('data-uploader-id', video.uploader_id); 
+                videoDiv.setAttribute('data-video-id', video.video_id);
+
+                videoDiv.classList.add('video-card');
+                videoDiv.innerHTML = `
+                    <div class="video-container">
+                        <video autoplay muted controls loop poster="https://via.placeholder.com/300x169">
+                            <source src="${video.video_url}"  type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">${video.title}</h3>
+                        <p class="video-author">By ${video.uploader_name}</p>
+                        <div class="video-stats">
+                            <span>${video.likes} Likes</span>
+                            <span>${video.upload_date}</span>
+                        </div>
+                    </div>
+                    <div class="video-actions">
+                        <button class="action-btn like-btn" data-uploader-id=${video.uploader_id} data-video-id=${video.video_id}>
+                            <i class="far fa-heart"></i>
+                            <span class="like-count">${video.likes}</span>
+                        </button>
+                        <button class="action-btn comment-btn">
+                            <i class="far fa-comment"></i>
+                            <span>${video.comments.length}</span>
+                        </button>
+                        <button class="action-btn favorite-btn">
+                            <i class="far fa-bookmark"></i>
+                            <span>Save</span>
+                        </button>
+                    </div>
+                    <div class="comment-section">
+                        ${
+                            video.comments.map(comment => `
+                                <div class="comment">
+                                    <div class="comment-avatar"></div>
+                                    <div class="comment-content">
+                                        <div class="comment-author">${comment.author}</div>
+                                        <div class="comment-text">${comment.text}</div>
+                                    </div>
+                                </div>
+                            `).join('')
+                        }
+                        <div class="comment-input">
+                            <input type="text" placeholder="Add a comment...">
+                            <button>Post</button>
+                        </div>
+                    </div>
+                `;
+                videoContainer.appendChild(videoDiv);
+            });
+        } else {
+            console.error('Error fetching videos:', data.error);
+            alert('Failed to load videos');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while fetching videos');
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const videoGrid = document.querySelector('.video-grid');
+
+    // Like button functionality
+    videoGrid.addEventListener('click', function (e) {
+        const likeBtn = e.target.closest('.like-btn');
+        if (likeBtn) {
+            const icon = likeBtn.querySelector('i');
+            const countElement = likeBtn.querySelector('.like-count');
+            let count = parseInt(countElement.textContent.replace(/[^0-9]/g, ''));
+
+            const uploaderId = likeBtn.dataset.uploaderId;
+            const videoId = likeBtn.dataset.videoId;
+
+            if (likeBtn.classList.contains('liked')) {
+                icon.classList.replace('fas', 'far');
+                unlike(uploaderId,videoId)
+
+                count--;
+            } else {
+                icon.classList.replace('far', 'fas');
+                count++;
+                like(uploaderId,videoId)
+            }
+
+            likeBtn.classList.toggle('liked');
+            countElement.textContent = count.toLocaleString();
+        }
+    });
+
+    // Favorite button functionality
+    videoGrid.addEventListener('click', function (e) {
+        const favBtn = e.target.closest('.favorite-btn');
+        if (favBtn) {
+            const icon = favBtn.querySelector('i');
+            const span = favBtn.querySelector('span');
+
+            if (favBtn.classList.contains('favorited')) {
+                icon.classList.replace('fas', 'far');
+                span.textContent = 'Save';
+            } else {
+                icon.classList.replace('far', 'fas');
+                span.textContent = 'Saved';
+            }
+
+            favBtn.classList.toggle('favorited');
+        }
+        
+    });
+
+    // Toggle comment section
+    videoGrid.addEventListener('click', function (e) {
+        const commentBtn = e.target.closest('.comment-btn');
+        if (commentBtn) {
+            const commentSection = commentBtn.closest('.video-card').querySelector('.comment-section');
+            commentSection.classList.toggle('expanded');
+        }
+    });
+
+    // Comment submission
+    videoGrid.addEventListener('click', function (e,) {
+        const postBtn = e.target.closest('.comment-input button');
+        if (postBtn) {
+            const input = postBtn.previousElementSibling;
+            const commentText = input.value.trim();
+
+            if (commentText) {
+                const commentSection = postBtn.closest('.comment-section');
+                const commentContainer = document.createElement('div');
+                commentContainer.className = 'comment';
+                commentContainer.innerHTML = `
+                    <div class="comment-avatar"></div>
+                    <div class="comment-content">
+                        <div class="comment-author">You</div>
+                        <div class="comment-text">${commentText}</div>
+                    </div>
+                `;
+
+                // Insert before the input box
+                const inputBox = commentSection.querySelector('.comment-input');
+                commentSection.insertBefore(commentContainer, inputBox);
+
+                input.value = '';
+
+                // Update comment count
+                const commentBtn = postBtn.closest('.video-card').querySelector('.comment-btn span');
+                let count = parseInt(commentBtn.textContent.replace(/[^0-9]/g, '')) || 0;
+                count++;
+                commentBtn.textContent = count.toLocaleString();
+                const videoCard = postBtn.closest('.video-card');
+                const uploaderId = videoCard.getAttribute("uploaderId")
+                const videoId = videoCard.getAttribute("videoId")
+                postComment(uploaderId,videoId,commentText)
+            }
+        }
+    });
+});
+
+function like(userId, postId) {
+    fetch('/like', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ user_id: userId, video_id: postId })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (!data.success) {
+            console.error('Error liking video:', data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Fetch error during like:', error);
+    });
+}
+
+function unlike(userId, postId) {
+    fetch('/unlike', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ user_id: userId, video_id: postId })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (!data.success) {
+            console.error('Error unliking video:', data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Fetch error during unlike:', error);
+    });
+}
+
+function postComment(userId, postId, msg) {
+    console.log("commenting.......")
+    fetch('/post_comment', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ user_id: userId, video_id: postId, comment: msg })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (!data.success) {
+            console.error('Error posting comment:', data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Fetch error during comment post:', error);
+    });
+}
+
+        window.onload = fetchvideos();
+    </script>
+        <script src="../static/js/user.js"></script>
+
+</body>
+</html>
+

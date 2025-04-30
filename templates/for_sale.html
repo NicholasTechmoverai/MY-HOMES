@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MY HOMES</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/style2.css"></head>
+<style>
+    
+        /* Navigation Bar Styles */
+        .nav-bar {
+            background-color: var(--dark-color);
+            padding: 15px 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-forms {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-forms a{
+            text-decoration: none;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: 2px solid var(--light-color);
+            color: var(--light-color);
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .nav-btn:hover {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .nav-btn.active {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+</style>
+<body>
+        <!-- Navigation Bar -->
+        <div class="nav-bar">
+            <div class="nav-container">
+                <div class="logo">
+                    <img src="home.png" alt="My Homes Logo" style="width: 50px; height: auto;">
+                    <span class="logo-text" style="color: white; font-size: 20px; margin-left: 10px;">MY HOMES</span>
+                </div>
+                
+                <div class="nav-forms">
+                    <a href="/" class="nav-btn">HOME</a>
+                    <a href="/about" class="nav-btn ">ABOUT</a>
+                    <a href="/for_sale" class="nav-btn active">FOR SALE</a>
+                    <a href="/for_rent" class="nav-btn ">FOR RENT</a>
+                    <a href="/sell" class="nav-btn ">SELL</a>
+                    <a href="/contact_us" class="nav-btn">CONTACT</a>
+                    <a href="/more" class="nav-btn">MORE</a>
+                    <a href="/login" class="nav-btn login-btn">LOGIN</a>
+                    <a href="/profile" style="display: none;" class="nav-btn profile-btn"><img src="" alt="profile"></a>
+                </div>
+                
+                
+                
+                
+            </div>
+        </div>
+
+    <div class="header">
+        <h1>Houses for Sell</h1>
+    </div>
+    <div class="container">
+        <div class="section">
+            <h2>Welcome to Our Housing Platform</h2>
+            <p>Find your dream home from our extensive list of verified houses for sale and rent. Our platform provides detailed information and high-quality images to help you make the best decision.</p>
+            
+            <div class="property-container">
+                <!-- Property Card 1 -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6" alt="Modern House">
+                    </div>
+                    <div class="property-details">
+                        <h3>Modern Family Home</h3>
+                        <div class="property-info">
+                            <span><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</span>
+                            <span>For Sale</span>
+                        </div>
+                        <div class="property-price">$350,000</div>
+                        <div class="property-features">
+                            <span class="feature"><i class="fas fa-bed"></i> 4 Beds</span>
+                            <span class="feature"><i class="fas fa-bath"></i> 3 Baths</span>
+                            <span class="feature"><i class="fas fa-ruler-combined"></i> 2200 sqft</span>
+                        </div>
+                        <button class="property-btn">View Details</button>
+                    </div>
+                </div>
+                
+                <!-- Property Card 2 -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="Luxury Apartment">
+                    </div>
+                    <div class="property-details">
+                        <h3>Luxury Apartment</h3>
+                        <div class="property-info">
+                            <span><i class="fas fa-map-marker-alt"></i> Mombasa, Kenya</span>
+                            <span>For Rent</span>
+                        </div>
+                        <div class="property-price">$1,200/mo</div>
+                        <div class="property-features">
+                            <span class="feature"><i class="fas fa-bed"></i> 3 Beds</span>
+                            <span class="feature"><i class="fas fa-bath"></i> 2 Baths</span>
+                            <span class="feature"><i class="fas fa-ruler-combined"></i> 1500 sqft</span>
+                        </div>
+                        <button class="property-btn">View Details</button>
+                    </div>
+                </div>
+                
+                <!-- Property Card 3 -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6" alt="Countryside Villa">
+                    </div>
+                    <div class="property-details">
+                        <h3>Countryside Villa</h3>
+                        <div class="property-info">
+                            <span><i class="fas fa-map-marker-alt"></i> Nakuru, Kenya</span>
+                            <span>For Sale</span>
+                        </div>
+                        <div class="property-price">$275,000</div>
+                        <div class="property-features">
+                            <span class="feature"><i class="fas fa-bed"></i> 5 Beds</span>
+                            <span class="feature"><i class="fas fa-bath"></i> 4 Baths</span>
+                            <span class="feature"><i class="fas fa-ruler-combined"></i> 3200 sqft</span>
+                        </div>
+                        <button class="property-btn">View Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pagination-container"></div>
+    
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>About Us</h3>
+                <p>My Homes is a leading real estate platform helping people find their dream homes across Kenya since 2010.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <a href="/">Home</a>
+                <a href="/about">About Us</a>
+                <a href="/buy">Properties for Sale</a>
+                <a href="/rent">Properties for Rent</a>
+                <a href="/contact_us">Contact Us</a>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Real Estate Ave, Nairobi</p>
+                <p><i class="fas fa-phone"></i> +254 700 000 000</p>
+                <p><i class="fas fa-envelope"></i> info@myhomes.com</p>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Newsletter</h3>
+                <p>Subscribe to our newsletter for the latest property updates.</p>
+                <form>
+                    <input type="email" placeholder="Your Email" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: none;">
+                    <button type="submit" class="property-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 My Homes. All rights reserved.</p>
+        </div>
+    </footer>
+    <div id="this-type" hidden>sell</div>
+    
+    <script src="/static/js/script.js"></script>
+    <script src="../static/js/user.js"></script>
+
+</body>
+</html>

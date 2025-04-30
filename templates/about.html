@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - MY HOMES</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        :root {
+            --primary-color: #2ecc71;
+            --primary-dark: #27ae60;
+            --secondary-color: #3498db;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --text-color: #333;
+            --text-light: #7f8c8d;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Navigation Bar Styles */
+        .nav-bar {
+            background-color: var(--dark-color);
+            padding: 15px 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-forms {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-forms a{
+            text-decoration: none;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: 2px solid var(--light-color);
+            color: var(--light-color);
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .nav-btn:hover {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .nav-btn.active {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        /* About Page Hero */
+        .about-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1600585152220-90363fe7e115') no-repeat center center/cover;
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+            background-attachment: fixed;
+        }
+
+        .about-hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .about-hero-content p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* About Content Sections */
+        .about-container {
+            max-width: 1400px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .about-section {
+            display: flex;
+            align-items: center;
+            margin-bottom: 80px;
+            gap: 50px;
+        }
+
+        .about-section.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h2 {
+            font-size: 2.2rem;
+            color: var(--dark-color);
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .about-text h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        /* Team Section */
+        .team-section {
+            text-align: center;
+            margin: 80px 0;
+        }
+
+        .team-section h2 {
+            font-size: 2.5rem;
+            color: var(--dark-color);
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .team-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--primary-color);
+        }
+
+        .team-members {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .team-member {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 5px solid var(--primary-color);
+        }
+
+        .team-member h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+
+        .team-member p.position {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .team-member p.bio {
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--light-color);
+            border-radius: 50%;
+            color: var(--dark-color);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf') no-repeat center center/cover;
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            background-attachment: fixed;
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stats-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .stat-item {
+            padding: 30px;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 50px 0 20px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .about-section {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .about-section.reverse {
+                flex-direction: column;
+            }
+            
+            .about-image, .about-text {
+                flex: none;
+                width: 100%;
+            }
+            
+            .about-hero-content h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-forms {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .about-hero {
+                height: 40vh;
+            }
+            
+            .about-hero-content h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .about-hero {
+                height: 30vh;
+            }
+            
+            .about-hero-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .about-hero-content p {
+                font-size: 1rem;
+            }
+            
+            .team-member {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="nav-bar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="home.png" alt="My Homes Logo" style="width: 50px; height: auto;">
+                <span class="logo-text" style="color: white; font-size: 20px; margin-left: 10px;">MY HOMES</span>
+            </div>
+            
+            <div class="nav-forms">
+                <a href="/" class="nav-btn">HOME</a>
+                <a href="/about" class="nav-btn active">ABOUT</a>
+                <a href="/for_sale" class="nav-btn">FOR SALE</a>
+                <a href="/for_rent" class="nav-btn ">FOR RENT</a>
+                <a href="/sell" class="nav-btn ">SELL</a>
+                <a href="/contact_us" class="nav-btn">CONTACT</a>
+                <a href="/more" class="nav-btn">MORE</a>
+                <a href="/login" class="nav-btn login-btn">LOGIN</a>
+                <a href="/profile" style="display: none;" class="nav-btn profile-btn"><img src="" alt="profile"></a>
+            </div>
+            
+            
+        </div>
+    </div>
+
+    <!-- About Hero Section -->
+    <section class="about-hero">
+        <div class="about-hero-content">
+            <h1>About My Homes</h1>
+            <p>Discover the story behind Kenya's most trusted real estate platform</p>
+        </div>
+    </section>
+
+    <!-- Our Story Section -->
+    <div class="about-container">
+        <section class="about-section">
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6" alt="Our Story">
+            </div>
+            <div class="about-text">
+                <h2>Our Story</h2>
+                <p>Founded in 2010, My Homes began as a small real estate agency in Nairobi with a vision to transform the property market in Kenya. What started as a modest office with just three employees has grown into the country's leading digital real estate platform.</p>
+                <p>Our journey has been driven by a passion for connecting people with their dream homes while maintaining the highest standards of integrity and professionalism in the industry.</p>
+                <p>Today, we serve thousands of clients across all major Kenyan cities, helping them navigate the property market with confidence and ease.</p>
+            </div>
+        </section>
+
+        <section class="about-section reverse">
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1605146769289-440113cc3d00" alt="Our Mission">
+            </div>
+            <div class="about-text">
+                <h2>Our Mission</h2>
+                <p>At My Homes, we believe everyone deserves a place they can call home. Our mission is to simplify the process of buying, selling, and renting properties while ensuring transparency at every step.</p>
+                <p>We're committed to:</p>
+                <p>- Providing accurate, up-to-date property information</p>
+                <p>- Offering expert guidance through every transaction</p>
+                <p>- Developing innovative tools to empower our clients</p>
+                <p>- Building long-term relationships based on trust</p>
+            </div>
+        </section>
+
+        <section class="about-section">
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d" alt="Our Values">
+            </div>
+            <div class="about-text">
+                <h2>Our Values</h2>
+                <p><strong>Integrity:</strong> We conduct our business with honesty and transparency, ensuring our clients can trust every piece of advice and every property listing.</p>
+                <p><strong>Excellence:</strong> From our website experience to our customer service, we strive for the highest standards in everything we do.</p>
+                <p><strong>Innovation:</strong> We continuously evolve our platform to incorporate the latest technologies that benefit our users.</p>
+                <p><strong>Community:</strong> We believe in giving back and actively participate in housing initiatives that benefit Kenyan communities.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Team Section -->
+    <div class="about-container">
+        <section class="team-section">
+            <h2>Meet Our Team</h2>
+            <div class="team-members">
+                <div class="team-member">
+                    <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Sarah Johnson">
+                    <h3>Gloria Ngao </h3>
+                    <p class="position">CEO & Founder</p>
+                    <p class="bio">With over 15 years in real estate, Sarah founded My Homes to revolutionize property transactions in Kenya.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="David Mwangi">
+                    <h3>Kariuki Nicholas</h3>
+                    <p class="position">Chief Technology Officer</p>
+                    <p class="bio">David leads our tech team in developing innovative solutions to enhance the property search experience.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Grace Omondi">
+                    <h3>Kenji Cladia</h3>
+                    <p class="position">Head of Sales</p>
+                    <p class="bio">Grace and her team have helped over 2,000 families find their perfect homes across Kenya.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-container">
+            <h2>By The Numbers</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">12+</div>
+                    <div class="stat-label">Years in Business</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15,000+</div>
+                    <div class="stat-label">Properties Listed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">8,500+</div>
+                    <div class="stat-label">Happy Clients</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Customer Support</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>About Us</h3>
+                <p>My Homes is a leading real estate platform helping people find their dream homes across Kenya since 2010.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <a href="/">Home</a>
+                <a href="/about">About Us</a>
+                <a href="/buy">Properties for Sale</a>
+                <a href="/rent">Properties for Rent</a>
+                <a href="/contact_us">Contact Us</a>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Real Estate Ave, Nairobi</p>
+                <p><i class="fas fa-phone"></i> +254 700 000 000</p>
+                <p><i class="fas fa-envelope"></i> info@myhomes.com</p>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Newsletter</h3>
+                <p>Subscribe to our newsletter for the latest property updates.</p>
+                <form>
+                    <input type="email" placeholder="Your Email" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: none;">
+                    <button type="submit" class="property-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 My Homes. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation active state
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set active nav button
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.trim().toLowerCase() === 'about') {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Form submission handling
+            document.querySelectorAll('.nav-forms form').forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const path = this.action;
+                    const method = this.method;
+                    
+                    if (method === 'GET') {
+                        window.location.href = path;
+                    } else {
+                        fetch(path, {
+                            method: method,
+                            headers: {
+                                'Content-Type': 'application/json',
+                            }
+                        })
+                        .then(response => {
+                            if (response.redirected) {
+                                window.location.href = response.url;
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="/static/js/user.js"></script>
+    <script src="../static/js/user.js"></script>
+
+</body>
+</html>

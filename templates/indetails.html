@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautiful 3-Bedroom Villa in Karen | LandEstate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/style2.css">
+    <style>
+        :root {
+            --primary-green: #2E8B57;
+            --light-green: #E8F5E9;
+            --dark-green: #1B5E20;
+            --white: #FFFFFF;
+            --light-gray: #F5F5F5;
+            --dark-gray: #333333;
+            --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary-green);
+            color: var(--white);
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .property-header {
+            margin-bottom: 2rem;
+        }
+
+        .property-header h1 {
+            font-size: 2.2rem;
+            color: var(--dark-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .property-header .location {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #555;
+            margin-bottom: 1rem;
+        }
+
+        .property-header .price {
+            font-size: 1.8rem;
+            color: var(--primary-green);
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        .property-details {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .property-details {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .gallery {
+            margin-bottom: 2rem;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .thumbnail-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .thumbnail {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .thumbnail:hover {
+            transform: scale(1.05);
+        }
+
+        .details-section {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 2rem;
+        }
+
+        .details-section h2 {
+            color: var(--primary-green);
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--light-green);
+            padding-bottom: 0.5rem;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .feature i {
+            color: var(--primary-green);
+        }
+
+        .description {
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .amenities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .amenity {
+            background-color: var(--light-green);
+            color: var(--dark-green);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .contact-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 2rem;
+        }
+
+        .contact-card h2 {
+            color: var(--primary-green);
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--light-green);
+            padding-bottom: 0.5rem;
+        }
+
+        .agent-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .agent-pic {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--light-green);
+        }
+
+        .agent-details h3 {
+            margin-bottom: 0.3rem;
+            color: var(--dark-green);
+        }
+
+        .agent-details p {
+            color: #555;
+        }
+
+        .contact-methods {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: var(--light-green);
+            border-radius: 8px;
+        }
+
+        .contact-method i {
+            font-size: 1.2rem;
+            color: var(--primary-green);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-green);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: center;
+            margin-top: 1rem;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background-color: var(--dark-green);
+        }
+
+        .property-type {
+            display: inline-block;
+            background-color: var(--light-green);
+            color: var(--dark-green);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>MY HOMES</h1>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="property-header">
+            <span class="property-type">{{ details.property_type }} For Sale</span>
+            <h1>{{ details.title }}</h1>
+            <div class="location">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>{{ details.address }}, {{ details.city }}</span>
+            </div>
+            <div class="price">KSh {{ "{:,.0f}".format(details.price) }}</div>
+        </div>
+    
+        <div class="property-details">
+            <div class="left-column">
+                <div class="gallery">
+                    {% if details.featured_image %}
+                    <img src="{{ details.featured_image }}" alt="Property main image" class="main-image" id="main-image">
+                    {% endif %}
+                    <div class="thumbnail-container">
+                        {% for img in details.images %}
+                        <img src="{{ img.url }}" alt="Property thumbnail" class="thumbnail" onclick="changeMainImage(this)">
+                        {% endfor %}
+                    </div>
+                </div>
+    
+                <div class="details-section">
+                    <h2>Property Details</h2>
+                    <div class="features">
+                        <div class="feature">
+                            <i class="fas fa-bed"></i>
+                            <span>{{ details.bedrooms }} Bedrooms</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-bath"></i>
+                            <span>{{ details.bathrooms }} Bathrooms</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-ruler-combined"></i>
+                            <span>{{ details.size_sqft }} sq.ft.</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Built in {{ details.year_built }}</span>
+                        </div>
+                    </div>
+    
+                    <div class="description">
+                        <h3>Description</h3>
+                        <p>{{ details.description | safe }}</p>
+                    </div>
+    
+                    <div class="amenities">
+                        <h3 style="width: 100%; margin-bottom: 0.5rem;">Amenities</h3>
+                        {% for amenity in details.amenities %}
+                        <span class="amenity">{{ amenity }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+    
+            <div class="right-column">
+                <div class="contact-card">
+                    <h2>Contact Agent</h2>
+                    <div class="agent-info">
+                        <img src="{{ details.owner_info.picture or 'https://via.placeholder.com/100' }}" alt="Agent photo" class="agent-pic">
+                        <div class="agent-details">
+                            <h3>{{ details.owner_info.name }}</h3>
+                            <p>Listing Agent</p>
+                        </div>
+                    </div>
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <i class="fas fa-phone"></i>
+                            <span>{{ details.owner_info.phone }}</span>
+                        </div>
+                        <div class="contact-method">
+                            <i class="fas fa-envelope"></i>
+                            <span>{{ details.owner_info.email }}</span>
+                        </div>
+                    </div>
+                    <a href="mailto:{{ details.owner_info.email }}" class="btn">
+                        <i class="fas fa-envelope"></i> Send Message
+                    </a>
+                </div>
+    
+                <div class="details-section">
+                    <h2>Schedule a Viewing</h2>
+                    <p>Contact the agent to schedule a property viewing at your convenience.</p>
+                    <a href="mailto:{{ details.owner_info.email }}?subject=Viewing%20Request%20for%20{{ details.title }}" class="btn">
+                        <i class="fas fa-calendar-alt"></i> Request Viewing
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>About Us</h3>
+                <p>My Homes is a leading real estate platform helping people find their dream homes across Kenya since 2010.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <a href="/">Home</a>
+                <a href="/about">About Us</a>
+                <a href="/buy">Properties for Sale</a>
+                <a href="/rent">Properties for Rent</a>
+                <a href="/contact_us">Contact Us</a>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Real Estate Ave, Nairobi</p>
+                <p><i class="fas fa-phone"></i> +254 700 000 000</p>
+                <p><i class="fas fa-envelope"></i> info@myhomes.com</p>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Newsletter</h3>
+                <p>Subscribe to our newsletter for the latest property updates.</p>
+                <form>
+                    <input type="email" placeholder="Your Email" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: none;">
+                    <button type="submit" class="property-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 My Homes. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function changeMainImage(element) {
+            const mainImage = document.getElementById('main-image');
+            mainImage.src = element.src;
+        }
+
+        // Format price with commas
+        document.addEventListener('DOMContentLoaded', function() {
+            const priceElement = document.querySelector('.price');
+            if (priceElement) {
+                const price = 25000000;
+                priceElement.textContent = 'KSh ' + price.toLocaleString();
+            }
+        });
+    </script>
+</body>
+</html>

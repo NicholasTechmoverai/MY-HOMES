@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | MY HOMES</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/style2.css">
+
+    <style>
+        :root {
+            --primary-green: #2E8B57;
+            --light-green: #E8F5E9;
+            --dark-green: #1B5E20;
+            --white: #FFFFFF;
+            --light-gray: #F5F5F5;
+            --dark-gray: #333333;
+            --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            --error-red: #ff4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary-green);
+            color: var(--white);
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .profile-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: var(--dark-green);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--primary-green);
+            margin: 1.5rem 0 1rem;
+            border-bottom: 2px solid var(--light-green);
+            padding-bottom: 0.5rem;
+        }
+
+        .profile-section {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--card-shadow);
+        }
+
+        .profile-info {
+            display: flex;
+            align-items: flex-start;
+            gap: 2rem;
+            position: relative;
+        }
+
+        .profile-pic-container {
+            position: relative;
+        }
+
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--light-green);
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .profile-pic:hover {
+            opacity: 0.8;
+        }
+
+        .profile-pic-edit {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: var(--primary-green);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .profile-details {
+            flex: 1;
+        }
+
+        .profile-details h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark-green);
+        }
+
+        .profile-details p {
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+
+        .profile-details p i {
+            color: var(--primary-green);
+            width: 20px;
+            text-align: center;
+            margin-right: 0.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-green);
+            color: var(--white);
+            padding: 0.7rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            background-color: var(--dark-green);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--light-green);
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        .btn-danger {
+            background-color: var(--error-red);
+        }
+
+        .btn-danger:hover {
+            background-color: #cc0000;
+        }
+
+        .property-container, .uploaded-posts {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .property-card, .post-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        .property-card:hover, .post-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .property-img, .post-img {
+            height: 180px;
+            overflow: hidden;
+        }
+
+        .property-img img, .post-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .property-card:hover .property-img img, .post-card:hover .post-img img {
+            transform: scale(1.05);
+        }
+
+        .property-details, .post-details {
+            padding: 1.2rem;
+        }
+
+        .property-details h3, .post-details h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark-green);
+        }
+
+        .property-details p, .post-details p {
+            color: #666;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .property-price {
+            font-weight: bold;
+            color: var(--primary-green);
+            font-size: 1.1rem;
+            margin: 0.8rem 0;
+        }
+
+        .property-actions, .post-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+        }
+
+        .remove-btn {
+            color: var(--error-red);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .remove-btn:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            background-color: var(--dark-green);
+            color: var(--white);
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+        }
+
+        /* Edit mode styles */
+        .edit-mode .view-field {
+            display: none;
+        }
+
+        .edit-mode .edit-field {
+            display: block;
+        }
+
+        .edit-field {
+            display: none;
+            margin-bottom: 0.5rem;
+        }
+
+        .edit-field input, .edit-field textarea, .edit-field select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .edit-actions {
+            display: flex;
+            margin-top: 1rem;
+            gap: 0.5rem;
+        }
+
+        .edit-mode .edit-actions {
+            display: flex;
+        }
+
+        .error-message {
+            color: var(--error-red);
+            font-size: 0.8rem;
+            margin-top: 0.2rem;
+            display: none;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            color: #ccc;
+            margin-bottom: 1rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #file-input {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .profile-info {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .profile-actions {
+                text-align: center;
+                margin-top: 1rem;
+            }
+
+            .property-actions, .post-actions {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .property-actions .btn, .post-actions .btn {
+                width: 100%;
+            }
+
+            .edit-actions {
+                flex-direction: column;
+            }
+
+            .edit-actions .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>MY HOMES</h1>
+            <div class="nav-forms">
+                <a href="/" class="nav-btn">HOME</a>
+                <a href="/about" class="nav-btn ">ABOUT</a>
+                <a href="/for_sale" class="nav-btn">FOR SALE</a>
+                <a href="/for_rent" class="nav-btn ">FOR RENT</a>
+                <a href="/sell" class="nav-btn ">SELL</a>
+                <a href="/contact_us" class="nav-btn">CONTACT</a>
+                <a href="/more" class="nav-btn">MORE</a>
+                <a href="/login" class="nav-btn login-btn">LOGIN</a>
+                <a href="/profile" style="display: none;" class="nav-btn profile-btn active"><img src="" alt="profile"></a>
+                <a href="/logout" class="nav-btn" onclick="document.cookie='user_info=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC';">Logout</a>
+
+            </div>
+            
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="profile-header">
+            <h1>My Profile</h1>
+            <button id="edit-profile-btn" class="btn">Edit Profile</button>
+            <div id="profile-edit-actions" class="edit-actions hidden">
+                <button id="save-profile-btn" class="btn">Save Changes</button>
+                <button id="cancel-edit-btn" class="btn btn-secondary">Cancel</button>
+            </div>
+        </div>
+
+        <section class="profile-section">
+            <div class="profile-info" id="profile-info">
+                <div class="profile-pic-container">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
+                         alt="Profile Picture" 
+                         class="profile-pic" 
+                         id="profile-pic">
+                    <div class="profile-pic-edit" id="edit-pic-btn">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <input type="file" id="file-input" accept="image/*">
+                </div>
+                <div class="profile-details">
+                    <div class="view-field">
+                        <h3 id="profile-name">Sarah Johnson</h3>
+                        <p><i class="fas fa-envelope"></i> <span id="profile-email">sarah.johnson@example.com</span></p>
+                        <p><i class="fas fa-phone"></i> <span id="profile-phone">(555) 123-4567</span></p>
+                        <p><i class="fas fa-map-marker-alt"></i> <span id="profile-location">San Francisco, CA</span></p>
+                    </div>
+                    
+                    <div class="edit-field">
+                        <div class="form-group">
+                            <label for="edit-name">Full Name</label>
+                            <input type="text" id="edit-name" value="Sarah Johnson">
+                            <div class="error-message" id="name-error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-email">Email</label>
+                            <input type="email" id="edit-email" value="sarah.johnson@example.com">
+                            <div class="error-message" id="email-error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-phone">Phone</label>
+                            <input type="tel" id="edit-phone" value="(555) 123-4567">
+                            <div class="error-message" id="phone-error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-location">Location</label>
+                            <input type="text" id="edit-location" value="San Francisco, CA">
+                            <div class="error-message" id="location-error"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-actions">
+                        <button class="btn btn-outline" id="change-password-btn">Change Password</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Change Password Modal (hidden by default) -->
+        <div id="password-modal" class="profile-section hidden">
+            <h2>Change Password</h2>
+            <div class="form-group">
+                <label for="current-password">Current Password</label>
+                <input type="password" id="current-password">
+                <div class="error-message" id="current-password-error"></div>
+            </div>
+            <div class="form-group">
+                <label for="new-password">New Password</label>
+                <input type="password" id="new-password">
+                <div class="error-message" id="new-password-error"></div>
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Confirm New Password</label>
+                <input type="password" id="confirm-password">
+                <div class="error-message" id="confirm-password-error"></div>
+            </div>
+            <div class="edit-actions">
+                <button id="save-password-btn" class="btn">Save Password</button>
+                <button id="cancel-password-btn" class="btn btn-secondary">Cancel</button>
+            </div>
+        </div>
+
+        <section class="profile-section">
+            <h2>My Uploaded Posts</h2>
+            <div class="pagination-container"></div>
+            <div class="property-container" id="property-container">
+                <!-- Properties will be loaded here dynamically -->
+                <div class="empty-state" id="saved-empty-state">
+                    <i class="fas fa-bookmark"></i>
+                    <p>You haven't saved any properties yet</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="profile-section">
+            <h2>Saved Properties</h2>
+
+            
+            <div class="uploaded-posts" id="uploaded-posts">
+                <!-- Posts will be loaded here dynamically -->
+                <div class="empty-state" id="posts-empty-state">
+                    <i class="fas fa-images"></i>
+                    <p>You haven't uploaded any posts yet</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>About Us</h3>
+                <p>My Homes is a leading real estate platform helping people find their dream homes across Kenya since 2010.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <a href="/">Home</a>
+                <a href="/about">About Us</a>
+                <a href="/buy">Properties for Sale</a>
+                <a href="/rent">Properties for Rent</a>
+                <a href="/contact_us">Contact Us</a>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Real Estate Ave, Nairobi</p>
+                <p><i class="fas fa-phone"></i> +254 700 000 000</p>
+                <p><i class="fas fa-envelope"></i> info@myhomes.com</p>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Newsletter</h3>
+                <p>Subscribe to our newsletter for the latest property updates.</p>
+                <form>
+                    <input type="email" placeholder="Your Email" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: none;">
+                    <button type="submit" class="property-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 My Homes. All rights reserved.</p>
+        </div>
+    </footer>
+    <div id="this-type" hidden>profile</div>
+
+
+    <script>
+        // Global variables
+        let isEditMode = false;
+        let savedProperties = [];
+        let uploadedPosts = [];
+
+        // DOM elements
+        const editProfileBtn = document.getElementById('edit-profile-btn');
+        const saveProfileBtn = document.getElementById('save-profile-btn');
+        const cancelEditBtn = document.getElementById('cancel-edit-btn');
+        const profileEditActions = document.getElementById('profile-edit-actions');
+        const profileInfo = document.getElementById('profile-info');
+        const changePasswordBtn = document.getElementById('change-password-btn');
+        const passwordModal = document.getElementById('password-modal');
+        const savePasswordBtn = document.getElementById('save-password-btn');
+        const cancelPasswordBtn = document.getElementById('cancel-password-btn');
+        const editPicBtn = document.getElementById('edit-pic-btn');
+        const fileInput = document.getElementById('file-input');
+        const profilePic = document.getElementById('profile-pic');
+        const savedPropertiesContainer = document.getElementById('property-container');
+        const savedEmptyState = document.getElementById('saved-empty-state');
+        const uploadedPostsContainer = document.getElementById('uploaded-posts');
+        const postsEmptyState = document.getElementById('posts-empty-state');
+
+        // Form fields
+        const viewFields = {
+            name: document.getElementById('profile-name'),
+            email: document.getElementById('profile-email'),
+            phone: document.getElementById('profile-phone'),
+            location: document.getElementById('profile-location')
+        };
+
+        const editFields = {
+            name: document.getElementById('edit-name'),
+            email: document.getElementById('edit-email'),
+            phone: document.getElementById('edit-phone'),
+            location: document.getElementById('edit-location')
+        };
+
+        // Password fields
+        const passwordFields = {
+            current: document.getElementById('current-password'),
+            new: document.getElementById('new-password'),
+            confirm: document.getElementById('confirm-password')
+        };
+
+        // Error messages
+        const errorMessages = {
+            name: document.getElementById('name-error'),
+            email: document.getElementById('email-error'),
+            phone: document.getElementById('phone-error'),
+            location: document.getElementById('location-error'),
+            currentPassword: document.getElementById('current-password-error'),
+            newPassword: document.getElementById('new-password-error'),
+            confirmPassword: document.getElementById('confirm-password-error')
+        };
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            loadUserProfile();
+            loadUploadedPosts();
+            setupEventListeners();
+        });
+
+        // Load user profile from cookie or backend
+        function loadUserProfile() {
+            const userInfoCookie = getCookie('user_info');
+            if (!userInfoCookie) {
+                // If no cookie, fetch from backend
+                fetchUserProfile();
+                return;
+            }
+
+            let userInfo;
+            try {
+                userInfo = JSON.parse(decodeURIComponent(userInfoCookie));
+            } catch (e) {
+                console.error('Invalid user_info cookie:', e);
+                fetchUserProfile();
+                return;
+            }
+
+            updateProfileDisplay(userInfo);
+        }
+
+        // Fetch user profile from backend
+        function fetchUserProfile() {
+            // Simulate API call - replace with actual fetch
+            setTimeout(() => {
+                const mockUserData = {
+                    name: "Sarah Johnson",
+                    email: "sarah.johnson@example.com",
+                    phone: "(555) 123-4567",
+                    location: "San Francisco, CA",
+                    picture: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                };
+                updateProfileDisplay(mockUserData);
+                
+                // In a real app, you would set the cookie from the response
+                // document.cookie = `user_info=${encodeURIComponent(JSON.stringify(mockUserData))}; path=/`;
+            }, 500);
+        }
+
+        // Update profile display with user data
+        function updateProfileDisplay(userInfo) {
+            if (!userInfo) return;
+
+            // Update view fields
+            if (userInfo.name) {
+                viewFields.name.textContent = userInfo.name;
+                editFields.name.value = userInfo.name;
+            }
+            if (userInfo.email) {
+                viewFields.email.textContent = userInfo.email;
+                editFields.email.value = userInfo.email;
+            }
+            if (userInfo.phone) {
+                viewFields.phone.textContent = userInfo.phone;
+                editFields.phone.value = userInfo.phone;
+            }
+            if (userInfo.location) {
+                viewFields.location.textContent = userInfo.location;
+                editFields.location.value = userInfo.location;
+            }
+            if (userInfo.picture) {
+                profilePic.src = userInfo.picture;
+            }
+            if(userInfo.id){
+                viewFields.email.setAttribute('user_id',userInfo.id)
+            }
+        }
+
+
+        // Render saved properties to the DOM
+        function renderSavedProperties() {
+            if (savedProperties.length === 0) {
+                savedEmptyState.classList.remove('hidden');
+                return;
+            }
+            
+            savedEmptyState.classList.add('hidden');
+            savedPropertiesContainer.innerHTML = '';
+            
+            savedProperties.forEach(property => {
+                const propertyCard = document.createElement('div');
+                propertyCard.className = 'property-card';
+                propertyCard.innerHTML = `
+                    <div class="property-img">
+                        <img src="${property.image}" alt="${property.title}">
+                    </div>
+                    <div class="property-details">
+                        <h3>${property.title}</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> ${property.location}</p>
+                        <p><i class="fas fa-ruler-combined"></i> ${property.size}</p>
+                        <p class="property-price">${property.price}</p>
+                        <div class="property-actions">
+                            <a href="#" class="btn">View Details</a>
+                            <button class="remove-btn" data-id="${property.id}"><i class="fas fa-trash-alt"></i> Remove</button>
+                        </div>
+                    </div>
+                `;
+                
+                savedPropertiesContainer.appendChild(propertyCard);
+            });
+            
+            // Add event listeners to remove buttons
+            document.querySelectorAll('.remove-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const propertyId = parseInt(e.currentTarget.getAttribute('data-id'));
+                    removeSavedProperty(propertyId);
+                });
+            });
+        }
+
+        // Remove a saved property
+        function removeSavedProperty(propertyId) {
+            if (confirm('Are you sure you want to remove this property from your saved list?')) {
+                // Simulate API call - replace with actual fetch
+                setTimeout(() => {
+                    savedProperties = savedProperties.filter(prop => prop.id !== propertyId);
+                    renderSavedProperties();
+                    
+                    // In a real app, you would send a DELETE request to your backend
+                    console.log(`Property ${propertyId} removed from saved list`);
+                }, 300);
+            }
+        }
+
+        // Load uploaded posts from backend
+        function loadUploadedPosts() {
+            // Simulate API call - replace with actual fetch
+            setTimeout(() => {
+                uploadedPosts = [
+                    {
+                        id: 1,
+                        title: "Beautiful Mountain View Land",
+                        location: "Aspen, Colorado",
+                        size: "5 Acres",
+                        price: "$1,500,000",
+                        image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                        status: "Active"
+                    },
+                    {
+                        id: 2,
+                        title: "Downtown Commercial Plot",
+                        location: "New York, NY",
+                        size: "0.5 Acres",
+                        price: "$3,250,000",
+                        image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                        status: "Pending"
+                    }
+                ];
+                
+                renderUploadedPosts();
+            }, 500);
+        }
+
+        // Render uploaded posts to the DOM
+        function renderUploadedPosts() {
+            if (uploadedPosts.length === 0) {
+                postsEmptyState.classList.remove('hidden');
+                return;
+            }
+            
+            postsEmptyState.classList.add('hidden');
+            uploadedPostsContainer.innerHTML = '';
+            
+            uploadedPosts.forEach(post => {
+                const postCard = document.createElement('div');
+                postCard.className = 'post-card';
+                postCard.innerHTML = `
+                    <div class="post-img">
+                        <img src="${post.image}" alt="${post.title}">
+                    </div>
+                    <div class="post-details">
+                        <h3>${post.title}</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> ${post.location}</p>
+                        <p><i class="fas fa-ruler-combined"></i> ${post.size}</p>
+                        <p class="property-price">${post.price}</p>
+                        <p><strong>Status:</strong> <span class="status-${post.status.toLowerCase()}">${post.status}</span></p>
+                        <div class="post-actions">
+                            <a href="#" hidden class="btn">Edit</a>
+                            <button hidden class="btn btn-outline">${post.status === 'Active' ? 'Deactivate' : 'Activate'}</button>
+                            <button class="btn btn-danger" data-id="${post.id}"><i class="fas fa-trash-alt"></i> Delete</button>
+                        </div>
+                    </div>
+                `;
+                
+                uploadedPostsContainer.appendChild(postCard);
+            });
+            
+            // Add event listeners to post action buttons
+            document.querySelectorAll('.post-actions .btn-danger').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const postId = parseInt(e.currentTarget.getAttribute('data-id'));
+                    deleteUploadedPost(postId);
+                });
+            });
+        }
+
+        // Delete an uploaded post
+        function deleteUploadedPost(postId) {
+            if (confirm('Are you sure you want to delete this post? This action cannot be undone.')) {
+                // Simulate API call - replace with actual fetch
+                setTimeout(() => {
+                    uploadedPosts = uploadedPosts.filter(post => post.id !== postId);
+                    renderUploadedPosts();
+                    
+                    // In a real app, you would send a DELETE request to your backend
+                    console.log(`Post ${postId} deleted`);
+                }, 300);
+            }
+        }
+
+        // Set up event listeners
+        function setupEventListeners() {
+            // Edit profile button
+            editProfileBtn.addEventListener('click', toggleEditMode);
+            
+            // Save profile button
+            saveProfileBtn.addEventListener('click', saveProfileChanges);
+            
+            // Cancel edit button
+            cancelEditBtn.addEventListener('click', cancelEdit);
+            
+            // Change password button
+            changePasswordBtn.addEventListener('click', showPasswordModal);
+            
+            // Save password button
+            savePasswordBtn.addEventListener('click', changePassword);
+            
+            // Cancel password button
+            cancelPasswordBtn.addEventListener('click', hidePasswordModal);
+            
+            // Edit profile picture button
+            editPicBtn.addEventListener('click', () => fileInput.click());
+            
+            // Profile picture file input
+            fileInput.addEventListener('change', handleProfilePicUpload);
+        }
+
+        // Toggle edit mode
+        function toggleEditMode() {
+            isEditMode = !isEditMode;
+            
+            if (isEditMode) {
+                profileInfo.classList.add('edit-mode');
+                profileEditActions.classList.remove('hidden');
+                editProfileBtn.classList.add('hidden');
+            } else {
+                profileInfo.classList.remove('edit-mode');
+                profileEditActions.classList.add('hidden');
+                editProfileBtn.classList.remove('hidden');
+            }
+        }
+        // Save profile changes
+        async function saveProfileChanges() {
+            // Validate inputs
+            let isValid = true;
+            
+            // Name validation
+            if (!editFields.name.value.trim()) {
+                errorMessages.name.textContent = 'Name is required';
+                errorMessages.name.style.display = 'block';
+                isValid = false;
+                editFields.name.focus(); // Focus on first invalid field
+            } else {
+                errorMessages.name.style.display = 'none';
+            }
+            
+            // Email validation
+            if (!editFields.email.value.trim()) {
+                errorMessages.email.textContent = 'Email is required';
+                errorMessages.email.style.display = 'block';
+                isValid = false;
+                if (isValid) editFields.email.focus();
+            } else if (!/^\S+@\S+\.\S+$/.test(editFields.email.value)) {
+                errorMessages.email.textContent = 'Please enter a valid email';
+                errorMessages.email.style.display = 'block';
+                isValid = false;
+                editFields.email.focus();
+            } else {
+                errorMessages.email.style.display = 'none';
+            }
+            
+            if (!isValid) {
+                // Visual feedback for validation errors
+                profileEditActions.style.animation = 'shake 0.5s';
+                setTimeout(() => {
+                    profileEditActions.style.animation = '';
+                }, 500);
+                return;
+            }
+            
+            // Show loading state
+            saveProfileBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+            saveProfileBtn.disabled = true;
+            
+            try {
+                const userId = viewFields.email.getAttribute('user_id');
+                if (!userId) {
+                    alert('User not identified. Please refresh the page and try again.');
+                    return;
+                }
+                // Prepare data for API request
+                const profileData = {
+                    name: editFields.name.value.trim(),
+                    email: editFields.email.value.trim(),
+                    phone: editFields.phone.value.trim(),
+                    location: editFields.location.value.trim(),
+                    user_id:userId
+                };
+                
+
+                // Send request to server
+                const response = await fetch('/updateProfile', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        // Add authorization header if needed
+                        // 'Authorization': `Bearer ${authToken}`
+                    },
+                    body: JSON.stringify(profileData),
+                });
+            
+                // Check response status
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || 'Failed to update profile');
+                }
+            
+                const result = await response.json();
+                console.log('Profile update successful:', result);
+                
+                // Update UI with new values
+                viewFields.name.textContent = profileData.name;
+                viewFields.email.textContent = profileData.email;
+                viewFields.phone.textContent = profileData.phone;
+                viewFields.location.textContent = profileData.location;
+                
+                // Update cookie with new user info
+                if (result.user_info) {
+                    document.cookie = `user_info=${encodeURIComponent(JSON.stringify(result.user_info))}; path=/`;
+                }
+                
+                // Show success feedback
+                saveProfileBtn.innerHTML = '<i class="fas fa-check"></i> Saved!';
+                setTimeout(() => {
+                    // Exit edit mode after showing success
+                    toggleEditMode();
+                    saveProfileBtn.innerHTML = '<i class="fas fa-save"></i> Save Changes';
+                    saveProfileBtn.disabled = false;
+                }, 1000);
+                
+            } catch (error) {
+                console.error('Error updating profile:', error);
+                
+                // Show error feedback
+                saveProfileBtn.innerHTML = '<i class="fas fa-exclamation-circle"></i> Error';
+                setTimeout(() => {
+                    saveProfileBtn.innerHTML = '<i class="fas fa-save"></i> Save Changes';
+                    saveProfileBtn.disabled = false;
+                }, 2000);
+                
+                // Show error message to user
+                alert(`Failed to update profile: ${error.message}`);
+            }
+        }
+                // Cancel edit and revert changes
+        function cancelEdit() {
+            // Revert to original values
+            editFields.name.value = viewFields.name.textContent;
+            editFields.email.value = viewFields.email.textContent;
+            editFields.phone.value = viewFields.phone.textContent;
+            editFields.location.value = viewFields.location.textContent;
+            
+            // Hide error messages
+            Object.values(errorMessages).forEach(msg => {
+                if (msg.id.includes('name') || msg.id.includes('email') || 
+                    msg.id.includes('phone') || msg.id.includes('location')) {
+                    msg.style.display = 'none';
+                }
+            });
+            
+            // Exit edit mode
+            toggleEditMode();
+        }
+
+        // Show password change modal
+        function showPasswordModal() {
+            passwordModal.classList.remove('hidden');
+        }
+
+        // Hide password change modal
+        function hidePasswordModal() {
+            // Clear fields and errors
+            passwordFields.current.value = '';
+            passwordFields.new.value = '';
+            passwordFields.confirm.value = '';
+            
+            errorMessages.currentPassword.style.display = 'none';
+            errorMessages.newPassword.style.display = 'none';
+            errorMessages.confirmPassword.style.display = 'none';
+            
+            passwordModal.classList.add('hidden');
+        }
+
+        // Change password
+        function changePassword() {
+            // Validate inputs
+            let isValid = true;
+            
+            // Current password validation
+            if (!passwordFields.current.value.trim()) {
+                errorMessages.currentPassword.textContent = 'Current password is required';
+                errorMessages.currentPassword.style.display = 'block';
+                isValid = false;
+            } else {
+                errorMessages.currentPassword.style.display = 'none';
+            }
+            
+            // New password validation
+            if (!passwordFields.new.value.trim()) {
+                errorMessages.newPassword.textContent = 'New password is required';
+                errorMessages.newPassword.style.display = 'block';
+                isValid = false;
+            } else if (passwordFields.new.value.length < 8) {
+                errorMessages.newPassword.textContent = 'Password must be at least 8 characters';
+                errorMessages.newPassword.style.display = 'block';
+                isValid = false;
+            } else {
+                errorMessages.newPassword.style.display = 'none';
+            }
+            
+            // Confirm password validation
+            if (!passwordFields.confirm.value.trim()) {
+                errorMessages.confirmPassword.textContent = 'Please confirm your new password';
+                errorMessages.confirmPassword.style.display = 'block';
+                isValid = false;
+            } else if (passwordFields.confirm.value !== passwordFields.new.value) {
+                errorMessages.confirmPassword.textContent = 'Passwords do not match';
+                errorMessages.confirmPassword.style.display = 'block';
+                isValid = false;
+            } else {
+                errorMessages.confirmPassword.style.display = 'none';
+            }
+            
+            if (!isValid) return;
+            
+            // Simulate API call - replace with actual fetch
+            setTimeout(() => {
+                console.log('Password changed');
+                alert('Your password has been changed successfully');
+                hidePasswordModal();
+            }, 500);
+        }
+
+        // Handle profile picture upload
+        async function handleProfilePicUpload(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            if (!file.type.match('image.*')) {
+                alert('Please select a valid image file (JPEG, PNG, etc.)');
+                return;
+            }
+            
+            // Get user ID
+            const userId = viewFields.email.getAttribute('user_id');
+            if (!userId) {
+                alert('User not identified. Please refresh the page and try again.');
+                return;
+            }
+            
+            // Create preview
+            const reader = new FileReader();
+            reader.onload = async (event) => {
+                profilePic.src = event.target.result;
+                
+                try {
+                    // Create FormData for file upload
+                    const formData = new FormData();
+                    formData.append('file', file);
+                    formData.append('user_id', userId);
+                    
+                    // Show loading state
+                    const uploadIndicator = document.createElement('div');
+                    uploadIndicator.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
+                    document.body.appendChild(uploadIndicator);
+                    
+                    // Send to backend
+                    const response = await fetch('/update/image', {
+                        method: 'POST',
+                        body: formData  // Let browser set Content-Type with boundary
+                    });
+                    
+                    if (!response.ok) {
+                        const error = await response.json();
+                        throw new Error(error.message || 'Failed to upload image');
+                    }
+                    
+                    const result = await response.json();
+                    console.log('Profile picture updated:', result);
+                    
+                    // Update cookie if needed
+                    if (result.user_info) {
+                        document.cookie = `user_info=${encodeURIComponent(JSON.stringify(result.user_info))}; path=/`;
+                    }
+                    
+                    alert('Profile picture updated successfully!');
+                } catch (error) {
+                    console.error('Error uploading profile picture:', error);
+                    alert(`Failed to upload: ${error.message}`);
+                } finally {
+                    uploadIndicator.remove();
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+                // Helper function to get cookie
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+    </script>
+        <script src="../static/js/user.js"></script>
+        <script src="../static/js/script.js"></script>
+
+</body>
+</html>

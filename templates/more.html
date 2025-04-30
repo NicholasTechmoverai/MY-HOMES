@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>More Resources | GreenEstate Properties</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/style2.css">
+    <style>
+        :root {
+            --primary-green: #2E8B57;
+            --light-green: #E8F5E9;
+            --dark-green: #1B5E20;
+            --white: #FFFFFF;
+            --light-gray: #F5F5F5;
+            --dark-gray: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary-green);
+            color: var(--white);
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            color: var(--dark-green);
+            margin: 2rem 0 1rem;
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--light-green);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            color: var(--primary-green);
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .card:hover .card-img img {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-green);
+            color: var(--white);
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: var(--dark-green);
+        }
+
+        .resource-list {
+            margin-left: 1.5rem;
+        }
+
+        .resource-list li {
+            margin-bottom: 0.8rem;
+        }
+
+        .accordion {
+            margin: 1rem 0;
+        }
+
+        .accordion-header {
+            background-color: var(--light-green);
+            padding: 1rem;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .accordion-header:hover {
+            background-color: #d0e8d0;
+        }
+
+        .accordion-content {
+            padding: 1rem;
+            background-color: var(--white);
+            border-radius: 0 0 4px 4px;
+            display: none;
+        }
+
+        .accordion.active .accordion-content {
+            display: block;
+        }
+
+        footer {
+            background-color: var(--dark-green);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .card-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="nav-forms">
+                <a href="/" class="nav-btn">HOME</a>
+                <a href="/about" class="nav-btn ">ABOUT</a>
+                <a href="/for_sale" class="nav-btn">FOR SALE</a>
+                <a href="/for_rent" class="nav-btn ">FOR RENT</a>
+                <a href="/sell" class="nav-btn active">SELL</a>
+                <a href="/contact_us" class="nav-btn">CONTACT</a>
+                <a href="/more" class="nav-btn">MORE</a>
+                <a href="/login" class="nav-btn login-btn">LOGIN</a>
+                <a href="/profile" style="display: none;" class="nav-btn profile-btn"><img src="" alt="profile"></a>
+            </div>
+            
+            <h1>More Resources</h1>
+            <p>Everything you need to make informed decisions about buying, selling, or renting properties</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section>
+            <h2>Featured Guides</h2>
+            <div class="card-container">
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="First Time Home Buyer">
+                    </div>
+                    <div class="card-content">
+                        <h3>First-Time Home Buyer's Guide</h3>
+                        <p>Everything you need to know about purchasing your first home, from mortgages to closing costs.</p>
+                        <a href="#" class="btn">Read Guide</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Selling Tips">
+                    </div>
+                    <div class="card-content">
+                        <h3>Maximize Your Home's Value</h3>
+                        <p>Proven strategies to get the best price when selling your property in any market.</p>
+                        <a href="#" class="btn">Read Guide</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Renting Guide">
+                    </div>
+                    <div class="card-content">
+                        <h3>Complete Renter's Handbook</h3>
+                        <p>Your rights as a tenant, lease agreements, and how to find the perfect rental.</p>
+                        <a href="#" class="btn">Read Guide</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Helpful Resources</h2>
+            <ul class="resource-list">
+                <li><strong>Mortgage Calculator:</strong> Estimate your monthly payments</li>
+                <li><strong>Neighborhood Reports:</strong> School districts, crime rates, and amenities</li>
+                <li><strong>Moving Checklist:</strong> Timeline for a stress-free move</li>
+                <li><strong>Home Maintenance Schedule:</strong> Keep your property in top condition</li>
+                <li><strong>Rental Agreement Templates:</strong> Customizable lease documents</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Frequently Asked Questions</h2>
+            <div class="accordion">
+                <div class="accordion-header">
+                    <span>How do I determine the right listing price for my home?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="accordion-content">
+                    <p>We recommend a comparative market analysis (CMA) which evaluates similar recently sold properties in your area, current market trends, and your home's unique features. Our agents can provide a free, no-obligation valuation.</p>
+                </div>
+            </div>
+            
+            <div class="accordion">
+                <div class="accordion-header">
+                    <span>What are the benefits of renting vs. buying?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="accordion-content">
+                    <p>Renting offers flexibility and fewer maintenance responsibilities, while buying builds equity and offers tax benefits. The right choice depends on your financial situation, lifestyle, and long-term goals. Use our "Rent vs. Buy Calculator" to compare costs.</p>
+                </div>
+            </div>
+            
+            <div class="accordion">
+                <div class="accordion-header">
+                    <span>How can I improve my credit score before applying for a mortgage?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="accordion-content">
+                    <p>Key steps include: paying bills on time, reducing credit card balances, avoiding new credit applications, and checking your credit report for errors. Most lenders recommend a score of at least 620 for conventional loans, with better rates available for scores above 740.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Our Services</h2>
+            <div class="card-container">
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1560520031-3a4dc4e9de0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Property Valuation">
+                    </div>
+                    <div class="card-content">
+                        <h3>Free Property Valuation</h3>
+                        <p>Get an accurate estimate of your home's current market value with our no-obligation assessment.</p>
+                        <a href="#" class="btn">Request Valuation</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Property Management">
+                    </div>
+                    <div class="card-content">
+                        <h3>Property Management</h3>
+                        <p>Full-service management for rental properties including tenant screening and maintenance.</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Investment Properties">
+                    </div>
+                    <div class="card-content">
+                        <h3>Investment Properties</h3>
+                        <p>Specialized services for real estate investors looking to build their portfolio.</p>
+                        <a href="#" class="btn">Explore Opportunities</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>About Us</h3>
+                <p>My Homes is a leading real estate platform helping people find their dream homes across Kenya since 2010.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <a href="/">Home</a>
+                <a href="/about">About Us</a>
+                <a href="/buy">Properties for Sale</a>
+                <a href="/rent">Properties for Rent</a>
+                <a href="/contact_us">Contact Us</a>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Real Estate Ave, Nairobi</p>
+                <p><i class="fas fa-phone"></i> +254 700 000 000</p>
+                <p><i class="fas fa-envelope"></i> info@myhomes.com</p>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Newsletter</h3>
+                <p>Subscribe to our newsletter for the latest property updates.</p>
+                <form>
+                    <input type="email" placeholder="Your Email" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: none;">
+                    <button type="submit" class="property-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 My Homes. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Accordion functionality
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const accordion = header.parentElement;
+                accordion.classList.toggle('active');
+                
+                const icon = header.querySelector('i');
+                if (accordion.classList.contains('active')) {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                } else {
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                }
+            });
+        });
+    </script>    
+    <script src="../static/js/user.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MY HOMES || LOGIN</title>
+    <style>
+        :root {
+            --primary-color: #2ecc71;
+            --primary-dark: #27ae60;
+            --primary-light: #d5f5e3;
+            --text-color: #2c3e50;
+            --light-gray: #ecf0f1;
+            --medium-gray: #bdc3c7;
+            --error-color: #e74c3c;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: linear-gradient(135deg, var(--primary-light) 0%, #f9f9f9 100%);
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                url(https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6) no-repeat center center / cover;
+    background-attachment: fixed;
+        }
+        
+        #msg-holder {
+            position: fixed;
+            top: 20px;
+            right: 5%;
+            width: fit-content;
+            text-align: center;
+            z-index: 1000;
+            background-color: green;
+            padding: 10px 5px;
+            border-radius: 5px;
+        }
+        
+        #outer-container {
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        #login-container, #signup-container, #recover-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        #signup-container, #recover-container {
+            display: none;
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--text-color);
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .logo-icon {
+            vertical-align: middle;
+            margin: 0 5px;
+            color: var(--primary-color);
+        }
+        
+        h1 {
+            text-align: center;
+            color: var(--text-color);
+            margin-bottom: 25px;
+            font-size: 24px;
+        }
+        
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--medium-gray);
+            transition: color 0.2s;
+        }
+        
+        .close:hover {
+            color: var(--error-color);
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(46, 204, 113, 0.2);
+        }
+        
+        .passwordInputs {
+            position: relative;
+            margin-bottom: 15px;
+        }
+        
+        .showHidePassword {
+            position: absolute;
+            right: 15px;
+            top: 12px;
+            cursor: pointer;
+            color: var(--medium-gray);
+            transition: color 0.2s;
+        }
+        
+        .showHidePassword:hover {
+            color: var(--primary-color);
+        }
+        
+        button {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 15px;
+            transition: background-color 0.3s;
+            font-weight: 600;
+        }
+        
+        button:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .secondary-btn {
+            background-color: white;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+        
+        .secondary-btn:hover {
+            background-color: var(--primary-light);
+        }
+        
+        label {
+            color: var(--text-color);
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        
+        label input {
+            width: auto;
+            margin-right: 8px;
+            margin-bottom: 0;
+        }
+        
+        .googleLogin {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .googleLogin span {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--medium-gray);
+            position: relative;
+        }
+        
+        .googleLogin span:before, .googleLogin span:after {
+            content: "";
+            display: inline-block;
+            width: 30%;
+            height: 1px;
+            background-color: var(--medium-gray);
+            position: absolute;
+            top: 50%;
+        }
+        
+        .googleLogin span:before {
+            left: 0;
+        }
+        
+        .googleLogin span:after {
+            right: 0;
+        }
+        
+        .googleLogin img {
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .googleLogin img:hover {
+            transform: scale(1.1);
+        }
+        
+        p {
+            text-align: center;
+            color: var(--medium-gray);
+            font-size: 14px;
+            margin: 10px 0;
+        }
+        
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        #notyPasswordState {
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: var(--error-color);
+        }
+        
+        #termsAndConditions {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        
+        #waitingforVerification {
+            display: none;
+            text-align: center;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        #waitingforVerification div:first-child {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+        
+        #waitingforVerification p {
+            margin-top: 20px;
+            font-style: italic;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div id="msg-holder"></div>
+    <div id="outer-container">
+        <div class="logo">
+            <ion-icon name="home-outline" class="logo-icon"></ion-icon>My Homes<ion-icon name="home-outline" class="logo-icon"></ion-icon>
+        </div>
+
+        <!-- Login Container -->
+        <div id="login-container">
+            <h1>Welcome Back</h1>
+            <form id="loginForm">
+                <input type="text" id="loginEmail" placeholder="Email" required>
+                <div class="passwordInputs">
+                    <input type="password" id="loginPassword" placeholder="Password" required>
+                    <div class="showHidePassword"><i class="fa-solid fa-eye"></i></div>
+                </div>
+                <button id="submitlogin" type="button">Login</button>
+                <div>
+                    <label for="rememberMe">
+                        <input type="checkbox" id="rememberMe">
+                        Remember Me
+                    </label>
+                </div>
+                <div class="googleLogin">
+                    <span>or continue with</span>
+                    <img src="../static/img/google_logo.png" alt="Google Logo">
+                </div>
+                <p>Forgot Password? <a id="recoverButton" href="#">Reset Password</a></p>
+                <p>Don't have an account? <a id="signUPbutton" href="#">Sign up</a></p>
+            </form>
+        </div>
+
+        <!-- Signup Container -->
+        <div id="signup-container">
+            <div class="close" id="closeSignup">×</div>
+            <h1>Create Account</h1>
+            <form id="signupForm">
+                <input type="text" id="signupEmail" placeholder="Email" required>
+                <input type="text" id="signupUsername" placeholder="Username" required>
+                <input type="tel" id="phoneNumber" placeholder="Phone Number">
+                <div class="passwordInputs">
+                    <input type="password" id="signupPassword" placeholder="Password" required>
+                    <div class="showHidePassword"><i class="fa-solid fa-eye"></i></div>
+                </div>
+                <div id="notyPasswordState"></div>
+                <div class="passwordInputs">
+                    <input type="password" id="signupConfirmPassword" placeholder="Confirm Password" required>
+                    <div class="showHidePassword"><i class="fa-solid fa-eye"></i></div>
+                </div>
+                <button type="button" id="submitTosignUP">Sign Up</button>
+                <div class="googleLogin">
+                    <span>or sign up with</span>
+                    <img src="../static/img/google_logo.png" alt="Google Logo">
+                </div>
+                <div id="termsAndConditions">
+                    <label for="termsAndConditionsCheckbox">
+                        <input type="checkbox" id="termsAndConditionsCheckbox" required>
+                        I agree to the <a href="#">Terms and Conditions</a>
+                    </label>
+                    <p>Already have an account? <a id="logINbutton" href="#">Login</a></p>
+                </div>
+            </form>
+        </div>
+
+        <!-- Password Recovery Container -->
+        <div id="recover-container">
+            <div class="close" id="closeRecover">×</div>
+            <h1>Reset Password</h1>
+            <form id="recoverForm">
+                <p>Enter your email address and we'll send you a link to reset your password.</p>
+                <input type="email" id="recoverEmail" placeholder="Email Address" required>
+                <button type="button" id="submitRecover">Send Reset Link</button>
+                <p><a id="backToLogin" href="#">Back to login</a></p>
+            </form>
+        </div>
+
+        <!-- Email Verification Message -->
+        <div id="waitingforVerification">
+            <div>Waiting for Email Verification</div>
+            <div>Please check your email inbox for the verification link</div>
+            <p>Waiting........</p>
+        </div>
+    </div>
+
+    <!-- Icons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="/static/js/login.js"></script>
+    
+    <!-- Toggle Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all containers
+            const loginContainer = document.getElementById('login-container');
+            const signupContainer = document.getElementById('signup-container');
+            const recoverContainer = document.getElementById('recover-container');
+            
+            // Get all toggle buttons
+            const signupButton = document.getElementById('signUPbutton');
+            const loginButton = document.getElementById('logINbutton');
+            const recoverButton = document.getElementById('recoverButton');
+            const backToLogin = document.getElementById('backToLogin');
+            const closeSignup = document.getElementById('closeSignup');
+            const closeRecover = document.getElementById('closeRecover');
+            
+            // Toggle functions
+            function showLogin() {
+                loginContainer.style.display = 'block';
+                signupContainer.style.display = 'none';
+                recoverContainer.style.display = 'none';
+            }
+            
+            function showSignup() {
+                loginContainer.style.display = 'none';
+                signupContainer.style.display = 'block';
+                recoverContainer.style.display = 'none';
+            }
+            
+            function showRecover() {
+                loginContainer.style.display = 'none';
+                signupContainer.style.display = 'none';
+                recoverContainer.style.display = 'block';
+            }
+            
+            // Event listeners
+            signupButton.addEventListener('click', showSignup);
+            loginButton.addEventListener('click', showLogin);
+            recoverButton.addEventListener('click', showRecover);
+            backToLogin.addEventListener('click', showLogin);
+            closeSignup.addEventListener('click', showLogin);
+            closeRecover.addEventListener('click', showLogin);
+            
+            // Show login by default
+            showLogin();
+            
+            // Password show/hide functionality
+            document.querySelectorAll('.showHidePassword').forEach(icon => {
+                icon.addEventListener('click', function() {
+                    const input = this.parentElement.querySelector('input');
+                    if (input.type === 'password') {
+                        input.type = 'text';
+                        this.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
+                    } else {
+                        input.type = 'password';
+                        this.innerHTML = '<i class="fa-solid fa-eye"></i>';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
