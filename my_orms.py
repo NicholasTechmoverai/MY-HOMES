@@ -54,7 +54,7 @@ class Property(Model):
 
 class PropertyImage(Model):
     image_id = fields.IntField(pk=True)
-    property_id = fields.ForeignKeyField("models.Property", related_name="images")
+    property = fields.ForeignKeyField("models.Property", related_name="images")
     image_url = fields.CharField(max_length=255)  # URL of the image
     uploaded_at = fields.DatetimeField(auto_now_add=True)
     is_featured = fields.BooleanField(default=False)  # Whether this image is featured
@@ -62,7 +62,7 @@ class PropertyImage(Model):
 
 class PropertyAmenity(Model):
     ammenity_id = fields.IntField(pk=True)
-    property_id = fields.ForeignKeyField("models.Property", related_name="ammenities")
+    property = fields.ForeignKeyField("models.Property", related_name="ammenities")
     ammenity_name = fields.CharField(max_length=255)  # Name of the amenity (e.g., "Pool", "Gym")
     description = fields.TextField(null=True)  # Description of the amenity
     created_at = fields.DatetimeField(auto_now_add=True)

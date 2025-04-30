@@ -11,12 +11,16 @@ UPLOAD_DIR = "statics/fies/img"
 class PropertyService:
     @staticmethod
     async def save_image(file: UploadFile) -> str:
-        filename = f"{uuid.uuid4()}_{file.filename}"
+        filename = f"{datetime.now}_{file.filename}"
+        now = datetime.now()
+        timestamp = now.strftime("%Y%m%d_%H%M%S")  # Format: YYYYMMDD_HHMMSS
+
+        filename = f"{timestamp}_{file.filename}"
         filepath = os.path.join(UPLOAD_DIR, filename)
         os.makedirs(UPLOAD_DIR, exist_ok=True)
         with open(filepath, "wb") as f:
             f.write(await file.read())
-        return filepath
+        return filename
 
     @staticmethod
     async def create(data, images: List[UploadFile]):
@@ -33,20 +37,19 @@ class PropertyService:
                 bathrooms=data.bathrooms,
                 year_built=data.year,
                 owner_id=data.owner_id,
-                state = data.state
+                state=data.state
             )
 
-            # Save Images
+            # Save Images - use property_obj instead of raw UUID
             for img in images:
                 img_path = await PropertyService.save_image(img)
-                await PropertyImage.create(property=property_obj, image_url=img_path)
+                await PropertyImage.create(property=property_obj, image_url=img_path, is_featured=False)
 
             # Save Amenities
             for amenity in data.amenities:
-                await PropertyAmenity.create(property=property_obj, ammenity_name=amenity)
+                await PropertyAmenity.create(property=property_obj, ammenity_name=amenity, description='')
 
             return property_obj
-
 
     @staticmethod
     async def get_all():
