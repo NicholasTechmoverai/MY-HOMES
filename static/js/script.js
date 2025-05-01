@@ -34,7 +34,7 @@ function fetchProperties(
       property_id
     };
   
-    fetch('/fetchproperties_special', {
+    fetch('/property', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -49,6 +49,7 @@ function fetchProperties(
       })
       .then(data => {
         if (data.success) {
+            
           renderProperties(data.properties, data.meta);
           updateFilterButtons(filterType);
         } else {

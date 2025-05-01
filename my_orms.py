@@ -54,7 +54,7 @@ class Property(Model):
 
 class PropertyImage(Model):
     image_id = fields.IntField(pk=True)
-    property = fields.ForeignKeyField("models.Property", related_name="images")
+    property: fields.ForeignKeyRelation[Property] = fields.ForeignKeyField("models.Property", related_name="images")
     image_url = fields.CharField(max_length=255)  # URL of the image
     uploaded_at = fields.DatetimeField(auto_now_add=True)
     is_featured = fields.BooleanField(default=False)  # Whether this image is featured
@@ -62,15 +62,15 @@ class PropertyImage(Model):
 
 class PropertyAmenity(Model):
     ammenity_id = fields.IntField(pk=True)
-    property = fields.ForeignKeyField("models.Property", related_name="ammenities")
+    property: fields.ForeignKeyRelation[Property] = fields.ForeignKeyField("models.Property", related_name="amenities")
     ammenity_name = fields.CharField(max_length=255)  # Name of the amenity (e.g., "Pool", "Gym")
     description = fields.TextField(null=True)  # Description of the amenity
     created_at = fields.DatetimeField(auto_now_add=True)
 
 class PropertyReview(Model):
     review_id = fields.IntField(pk=True)
-    property_id = fields.ForeignKeyField("models.Property", related_name="reviews")
-    user_id = fields.ForeignKeyField("models.User", related_name="reviews")
+    property: fields.ForeignKeyRelation[Property] = fields.ForeignKeyField("models.Property", related_name="reviews")
+    user = fields.ForeignKeyField("models.User", related_name="reviews")
     rating = fields.IntField()  # Rating out of 5
     comment = fields.TextField(null=True)  # Review comment
     created_at = fields.DatetimeField(auto_now_add=True)

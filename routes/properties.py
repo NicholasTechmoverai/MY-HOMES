@@ -1,8 +1,9 @@
-from fastapi import APIRouter, HTTPException, UploadFile, File, Form
-from schemas.property import PropertyCreate, PropertyResponse,PropertyFilter
+from fastapi import APIRouter, HTTPException, UploadFile, File, Form ,Body,Request
+from schemas.property import PropertyCreate, PropertyResponse,PropertyFilter,PropertyListResponse
 from property import PropertyService  # Assuming this is your service layer
 from typing import List
 from uuid import UUID
+from fastapi.templating import Jinja2Templates
 
 property_router = APIRouter(tags=["Properties"])
 
@@ -11,12 +12,13 @@ from typing import List
 from uuid import UUID
 
 from fastapi import Request
+from fastapi.responses import HTMLResponse
 
 from typing import Optional
 from pydantic import BaseModel
 
 
-@property_router.post("/")
+@property_router.post("/sell")
 async def create_property(
     request: Request,
     title: str = Form(...),
@@ -44,12 +46,6 @@ async def create_property(
     except ValueError:
         raise HTTPException(status_code=422, detail="Invalid owner_id format")
 
-    # Debug: Print all received form data
-    print("=== Received Form Data ===")
-    for key, value in form_data.multi_items():
-        print(f"{key}: {value}")
-
-    # Create Property
     property_data = PropertyCreate(
         title=title,
         type=type,
@@ -66,21 +62,52 @@ async def create_property(
         contact_phone=contact_phone,
         contact_email=contact_email,
         owner_id=owner_uuid,
-        state= "Naks",
+        state= state,
     )
 
     new_property = await PropertyService.create(property_data, images)
     return {"status": "success", "property_id": new_property.property_id}
-@property_router.get("/", response_model=PropertyFilter)
-async def list_properties():
-    return await PropertyService.get_all()
 
-@property_router.get("/{property_id}", response_model=PropertyResponse)
-async def get_property(property_id: UUID):
+from fastapi import Query
+
+
+@property_router.post("/", response_model=PropertyListResponse)
+async def list_properties(
+    filters: PropertyFilter = Body(...),
+    limit: int = Query(10, ge=1),
+    offset: int = Query(0, ge=0)
+):
+    query = await PropertyService.filter_properties(filters)
+    # print(type(query))
+    # print(query)
+
+    results = query
+
+    return {
+        "success": True,
+        "properties": results,  
+        "meta": {
+            "total": 1,
+            "limit": limit,
+            "offset": offset,
+            "returned": len(results)
+        }
+    }
+
+from fastapi.templating import Jinja2Templates
+
+templates = Jinja2Templates(directory="templates")
+
+@property_router.get("/{property_id}", response_model=PropertyListResponse)
+async def get_property(property_id: UUID, request: Request):
     prop = await PropertyService.get_by_id(property_id)
     if not prop:
         raise HTTPException(status_code=404, detail="Property not found")
-    return prop
+    return templates.TemplateResponse("indetails.html",context={"request": request, "details": prop})
+    # return prop
+
+
+
 
 @property_router.delete("/{property_id}")
 async def delete_property(property_id: UUID):
